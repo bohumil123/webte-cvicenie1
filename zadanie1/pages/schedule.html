@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Samuel Gábriš | Rozvrh</title>
+    <meta
+        name="description"
+        content="Rozvrh predmetov s filtrami, aktuálnou výučbou a priebehom semestra."
+    >   
+    <meta property="og:title" content="Samuel Gábriš | Rozvrh">    
+    <meta
+        property="og:description"
+        content="Interaktívny rozvrh predmetov s filtrami a informáciou o aktuálnej výučbe."
+    >  
+    <meta
+        property="og:url"
+        content="https://webte1.fei.stuba.sk/~xgabriss1/zadanie1/pages/schedule.html"
+    >
+    <meta property="og:type" content="website">
+    <meta
+        property="og:image"
+        content="https://webte1.fei.stuba.sk/~xgabriss1/zadanie1/img/me.jpg"
+    >
+    <meta
+        property="og:image:alt"
+        content="Profilový obrázok Samuela Gábriša"
+    >
+    <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class = "monogram">SG</div>
+        <h1>
+            Samuel Gábriš
+        </h1>
+        <h2>
+            Študent aplikovanej informatiky, mám záujem o programovanie a vývoj hier.
+        </h2>
+        <nav>
+            <button class="menuToggle">
+                ☰
+            </button>
+            <ul id = "menu">
+                <li><a href="../index.html">Profil</a></li>
+                <li><a href="cv.html">Životopis</a></li>
+                <li><a class="active" href="schedule.html">Rozvrh</a></li>
+                <li><a href="hobbies.html">Herný projekt</a></li>
+                <li><a href="map.html">Mapa</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+            <div class="scheduleFilter">
+                <button class="filterButton active" data-filter="all"> Všetko</button>
+                <button class="filterButton" data-filter="lecture"> Prednášky</button>
+                <button class="filterButton" data-filter="exersise"> Cvičenia</button>
+                <div class="scheduleInfo">
+                    <button class="infoButton">i</button>            
+                    <div class="infoPanel">
+                        <p><strong>OS</strong> – Operačné systémy</p>
+                        <p><strong>WEBTE</strong> – Webové technológie</p>
+                        <p><strong>LA2</strong> – Lineárna algebra 2</p>
+                        <p><strong>MASTA</strong> – Matematická štatistika</p>
+                        <p><strong>AZA</strong> – Analýza a zložitosť algoritmov</p>
+                        <p><strong>BP</strong> – Bakalárska práca</p>
+                    </div>
+                </div>
+            </div>
+            <p class="Warning"></p>
+
+            <div class="scheduleWrapper">
+                <table class="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th>Hodina</th>
+                            <th>7:00</th>
+                            <th>8:00</th>
+                            <th>9:00</th>
+                            <th>10:00</th>
+                            <th>11:00</th>
+                            <th>12:00</th>
+                            <th>13:00</th>
+                            <th>14:00</th>
+                            <th>15:00</th>
+                            <th>16:00</th>
+                            <th>17:00</th>
+                            <th>18:00</th>
+                            <th>19:00</th>
+                            <th>20:00</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>PO</td>
+                            <td colspan="2"></td>
+                            <td class="Pe" colspan="2" data-day="1" data-start="09:00" data-end="11:00" data-type="exersise">TV<br> pos</td>
+                            <td class="Exersise" colspan="2" data-day="1" data-start="11:00" data-end="13:00" data-type="exersise"> WEBTE<br> c137</td>
+                            <td class="Exersise" colspan="2" data-day="1" data-start="13:00" data-end="15:00" data-type="exersise"> OS<br> cpu-i </td>
+                            <td class="Lecture" colspan="2" data-day="1" data-start="15:00" data-end="17:00" data-type="lecture"> LA2<br> cd300</td>
+                            <td colspan="4"></td>
+                        </tr>
+
+                        <tr>
+                            <td>UT</td>
+                            <td></td>
+                            <td class="Lecture" data-type="lecture" data-day="2" data-start="08:00" data-end="10:00" colspan="2"> AZA<br> de300</td>
+                            <td class="Lecture" colspan="2" data-type="lecture" data-day="2" data-start="10:00" data-end="12:00"> WEBTE<br> cd150</td>
+                            <td></td>
+                            <td class="Lecture" colspan="2" data-type="lecture" data-day="2" data-start="13:00" data-end="15:00"> MASTA<br> bc150</td>
+                            <td colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>STR</td>
+                            <td></td>
+                            <td class="Lecture" colspan="2" data-type="lecture" data-day="3" data-start="08:00" data-end="10:00"> OS<br> cd300</td>
+                            <td class="Lecture" colspan="2" data-type="lecture" data-day="3" data-start="10:00" data-end="12:00">AZA<br> bc150</td>
+                            <td class="Exersise" data-type="exersise" data-day="3" data-start="12:00" data-end="13:00"> BP</td>
+                            <td class="Exersise" colspan="2" data-type="exersise" data-day="3" data-start="13:00" data-end="15:00"> MASTA<br> c430</td>
+                            <td colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td>STV</td>
+                            <td colspan="14"></td>
+                        </tr>
+                        <tr>
+                            <td>PIA</td>
+                            <td colspan="2"></td>
+                            <td class="Exersise" data-type="exersise" data-day="5" data-start="09:00" data-end="10:00"> AZA<br> cd150</td>
+                            <td class="Exersise" colspan="2" data-type="exersise" data-day="5" data-start="10:00" data-end="12:00">LA2<br> bc35</td>
+                            <td colspan="9"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subjectInfo">
+                <p>Najbližšia hodina</p>
+            </div>
+
+            <div class="semesterBar">
+                <label for="semesterBar">Priebeh semestra: </label>
+                <progress id="semesterBar" value="0" max="100"></progress>
+                <span id="semesterPercent">0%</span>
+            </div>
+    </main>
+    <footer>
+    <address>
+                <p> E-mail: <a href="mailto:samogabris05@gmail.com">samogabris05@gmail.com</a></p>
+                <p> Telefón: <a href="tel:+421944042488"> +421 944 042 488</a></p>
+    </address>
+    <p>&copy; 2026</p>
+    <p>
+        Zdroje:
+        <a href="https://www.openstreetmap.org/" target="_blank">
+            OpenStreetMap
+        </a>
+        |
+        <a href="https://leafletjs.com/" target="_blank">
+            Leaflet
+        </a>
+    </p>
+</footer>
+<script src="../js/script.js"></script>
+</body>
+</html>

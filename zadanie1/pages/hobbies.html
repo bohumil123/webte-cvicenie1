@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Samuel Gábriš | Herný projekt</title>
+
+    <meta
+        name="description"
+        content="Interaktívna ukážka herného projektu."
+    >
+
+    <meta property="og:title" content="Samuel Gábriš | Herný projekt">
+
+    <meta
+        property="og:description"
+        content="Interaktívna ukážka herného projektu."
+    >
+    <meta
+        property="og:url"
+        content="https://webte1.fei.stuba.sk/~xgabriss1/zadanie1/pages/hobbies.html"
+    >
+
+    <meta property="og:type" content="website">
+
+    <meta
+        property="og:image"
+        content="https://webte1.fei.stuba.sk/~xgabriss1/zadanie1/img/me.jpg"
+    >
+
+    <meta
+        property="og:image:alt"
+        content="Profilový obrázok Samuela Gábriša"
+    >
+    <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class = "monogram">SG</div>
+        <h1>
+            Samuel Gábriš
+        </h1>
+        <h2>
+            Študent aplikovanej informatiky, mám záujem o programovanie a vývoj hier.
+        </h2>
+        <nav>
+            <button class="menuToggle">
+                ☰
+            </button>
+            <ul id = "menu">
+                <li><a href="../index.html">Profil</a></li>
+                <li><a href="cv.html">Životopis</a></li>
+                <li><a href="schedule.html">Rozvrh</a></li>
+                <li><a class="active" href="hobbies.html">Herný projekt</a></li>
+                <li><a href="map.html">Mapa</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <h1>Obrázok z mojej hry v Unity</h1>
+
+    <p class="gameDescription">
+        Ukážka z mojej jednoduchej 2D ťahovej hry vytvorenej v Unity.
+        Jednotlivé prvky hry si môžete prezrieť pomocou vyznačených oblastí na obrázku.
+    </p>
+
+    <div class="hobbies">
+
+        <div class="gameMap">
+
+            <input class="hotspotRadio" type="radio" name="gamePart" id="intro" checked>
+            <input class="hotspotRadio" type="radio" name="gamePart" id="player">
+            <input class="hotspotRadio" type="radio" name="gamePart" id="enemy">
+            <input class="hotspotRadio" type="radio" name="gamePart" id="health">
+            <input class="hotspotRadio" type="radio" name="gamePart" id="actions">
+            <input class="hotspotRadio" type="radio" name="gamePart" id="stats">
+
+            <div class="gameImageArea">
+
+                <img
+                    class="hobbyImg"
+                    src="../img/game.jpg"
+                    alt="Obrázok hry"
+                >
+
+                <label class="hotspot hotspotPlayer" for="player" tabindex="0">
+                    <span class="hotspotPanel">
+                        <strong>Hráč</strong>
+                        <span>Postava, ktorú počas súboja ovládame.</span>
+                    </span>
+                </label>
+
+                <label class="hotspot hotspotEnemy" for="enemy" tabindex="0">
+                    <span class="hotspotPanel">
+                        <strong>Nepriateľ</strong>
+                        <span>Nepriateľská postava počas súboja.</span>
+                    </span>
+                </label>
+
+                <label class="hotspot hotspotHealth" for="health" tabindex="0">
+                    <span class="hotspotPanel">
+                        <strong>Health systém</strong>
+                        <span>Zobrazenie aktuálneho zdravia postáv.</span>
+                    </span>
+                </label>
+
+                <label class="hotspot hotspotActions" for="actions" tabindex="0">
+                    <span class="hotspotPanel">
+                        <strong>Battle menu</strong>
+                        <span>Menu obsahujúce dostupné akcie hráča.</span>
+                    </span>
+                </label>
+
+                <label class="hotspot hotspotStats" for="stats" tabindex="0">
+                    <span class="hotspotPanel">
+                        <strong>Štatistiky hráča</strong>
+                        <span>Zobrazenie HP a MP hráča.</span>
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="hotspotInfo">
+
+                <div class="infoPanelH infoIntro">
+                    <strong>Vyberte oblasť</strong>
+                    <p>Kliknite na jednu z označených oblastí obrázka.</p>
+                </div>
+
+                <div class="infoPanelH infoPlayer">
+                    <strong>Hráč</strong>
+                    <p>Postava, ktorú počas súboja ovládame.</p>
+                </div>
+
+                <div class="infoPanelH infoEnemy">
+                    <strong>Nepriateľ</strong>
+                    <p>Nepriateľská postava počas súboja.</p>
+                </div>
+
+                <div class="infoPanelH infoHealth">
+                    <strong>Health systém</strong>
+                    <p>Zobrazenie aktuálneho zdravia postáv.</p>
+                </div>
+
+                <div class="infoPanelH infoActions">
+                    <strong>Battle menu</strong>
+                    <p>Menu obsahujúce dostupné akcie hráča.</p>
+                </div>
+
+                <div class="infoPanelH infoStats">
+                    <strong>Štatistiky hráča</strong>
+                    <p>Zobrazenie HP a MP hráča.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
+    <footer>
+    <address>
+                <p> E-mail: <a href="mailto:samogabris05@gmail.com">samogabris05@gmail.com</a></p>
+                <p> Telefón: <a href="tel:+421944042488"> +421 944 042 488</a></p>
+    </address>
+    <p>&copy; 2026</p>
+    <p>
+        Zdroje:
+        <a href="https://www.openstreetmap.org/" target="_blank">
+            OpenStreetMap
+        </a>
+        |
+        <a href="https://leafletjs.com/" target="_blank">
+            Leaflet
+        </a>
+    </p>
+</footer>
+<script src="../js/script.js"></script>
+</body>
+</html>

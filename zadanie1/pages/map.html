@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+    <title>Samuel Gábriš | Mapa</title>
+
+    <meta
+        name="description"
+        content="Interaktívna mapa s vlastnými bodmi, školou, domovom a výpočtom vzdialenosti."
+    >
+
+    <meta property="og:title" content="Samuel Gábriš | Mapa">
+
+    <meta
+        property="og:description"
+        content="Interaktívna mapa s ukladaním bodov a výpočtom vzdialenosti pomocou Haversinovho vzorca."
+    >
+    <meta
+        property="og:url"
+        content="https://webte1.fei.stuba.sk/~xgabriss1/zadanie1/pages/map.html"
+    >
+
+    <meta property="og:type" content="website">
+
+    <meta
+        property="og:image"
+        content="https://webte1.fei.stuba.sk/~xgabriss1/zadanie1/img/me.jpg"
+    >
+
+    <meta
+        property="og:image:alt"
+        content="Profilový obrázok Samuela Gábriša"
+    >
+    <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class = "monogram">SG</div>
+        <h1>
+            Samuel Gábriš
+        </h1>
+        <h2>
+            Študent aplikovanej informatiky, mám záujem o programovanie a vývoj hier.
+        </h2>
+        <nav>
+            <button class="menuToggle">
+                ☰
+            </button>
+            <ul id = "menu">
+                <li><a href="../index.html">Profil</a></li>
+                <li><a href="cv.html">Životopis</a></li>
+                <li><a href="schedule.html">Rozvrh</a></li>
+                <li><a href="hobbies.html">Herný projekt</a></li>
+                <li><a class="active" href="map.html">Mapa</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="mapInstructions">
+        <p>
+            Kliknutím na mapu pridáte nový bod. Pomenujte ho a následne ho vyberte zo zoznamu. Potom vyberte cieľ a vypočítajte vzdialenosť.
+        </p>
+        </div>
+        <div id="map"></div>
+        <div class = "listsWrapper">
+            <section>
+                <h2>Ciele</h2>
+                <ul id="targetPlaces"></ul>
+            </section>
+            <section>    
+                <h2>Uložené miesta</h2>
+                <ul id="savedPlaces" class="savedPlaces"></ul>
+            </section>
+        </div>
+        <div class="distanceInfo">
+            <button id="calculateDistance" class="filterButton">Vypočítať vzdialenosť</button>
+            <p id="distanceResult"></p>
+        </div>
+    </main>
+    <footer>
+    <address>
+                <p> E-mail: <a href="mailto:samogabris05@gmail.com">samogabris05@gmail.com</a></p>
+                <p> Telefón: <a href="tel:+421944042488"> +421 944 042 488</a></p>
+    </address>
+    <p>&copy; 2026</p>
+    <p>
+        Zdroje:
+        <a href="https://www.openstreetmap.org/" target="_blank">
+            OpenStreetMap
+        </a>
+        |
+        <a href="https://leafletjs.com/" target="_blank">
+            Leaflet
+        </a>
+    </p>
+</footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../js/script.js"></script>
+</body>
+
+</html>
