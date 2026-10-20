@@ -1,0 +1,417 @@
+
+:root {
+    --brand-primary: #dfd689;
+    --brand-secondary: #242020;
+    --accent: #a12d19;
+    --paper: #f7f6ee;
+    --white: #fffefa;
+    --line: #cbc8b9;
+    --muted: #57554e;
+
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --body: "Poppins", Arial, sans-serif;
+}
+
+/* FONTS */
+
+
+
+@font-face {
+    font-family: "Poppins";
+    src: url(../assets/fonts/Poppins-Regular\ .ttf) format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(../assets/fonts/Poppins-SemiBold\ \(1\).ttf) format("truetype");
+    font-weight: 600;
+}
+
+/* GENERAL */
+
+html {
+    min-height: 100%;
+}
+
+body {
+    background-color: var(--paper);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: var(--body);
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--brand-secondary);
+    border-bottom: 5px solid var(--brand-primary);
+
+    padding: 18px 45px;
+    min-height: 80px;
+}
+
+header h1 {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 700;
+
+    color: var(--white);
+    margin: 0;
+    line-height: 1;
+}
+
+/* NAVIGATION */
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    list-style: none;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+nav a,
+nav a:visited {
+    color: var(--white);
+    text-decoration: none;
+
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 400;
+
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+
+    transition: color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--brand-primary);
+    border-bottom-color: var(--brand-primary);
+}
+
+nav a.active,
+nav a.active:visited {
+    color: var(--brand-primary);
+    font-weight: 600;
+    border-bottom-color: var(--brand-primary);
+}
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    background-color: var(--brand-secondary);
+    border-top: 5px solid var(--brand-primary);
+
+    color: var(--white);
+    padding: 20px 45px;
+    margin-top: auto;
+
+    font-family: var(--body);
+    font-size: 12px;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a,
+footer a:visited {
+    color: var(--brand-primary);
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: var(--white);
+}
+/* HAMBURGER */
+
+.menuToggle {
+    display: none;
+    background-color: transparent;
+    border: 1px solid var(--brand-primary);
+    border-radius: 4px;
+    color: var(--brand-primary);
+    cursor: pointer;
+    padding: 4px 10px;
+}
+
+.menuToggle i {
+    font-size: 15px;
+}
+
+.motto{
+    font-family: var(--body);
+    font-weight: bold;
+}
+
+.schoolAddress{
+    color: var(--accent);
+}
+
+
+/* HLAVNE ROZLOZENIE */
+
+.pageLayout {
+    display: grid;
+
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+
+    grid-template-areas:
+        "intro intro map"
+        "filters menu menu";
+
+    gap: 30px;
+}
+
+.leftLayout {
+    grid-area: intro;
+    min-width: 0;
+}
+
+.rightLayout {
+    grid-area: map;
+    min-width: 0;
+}
+
+.menuLayout {
+    grid-area: menu;
+    min-width: 0;
+}
+
+.filters{
+    grid-area: filters;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    align-self: flex-start;
+
+}
+
+/* RESTAURANT FILTER THINGS */
+
+.filters .card-header{
+    background-color: var(--brand-secondary);
+    color: var(--white);
+    font-weight: bold;
+    padding: 15px;
+}
+
+.filters .card-body{
+    background-color: var(--paper);
+}
+
+.filters .form-check{
+    margin-bottom: 12px;
+}
+
+.filters .form-check-input:checked{
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.locationButton{
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.locationButton:hover{
+    color: var(--white);
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* UVODNY TEXT */
+
+.dateLine {
+    font-weight: 600;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+}
+
+#foodCount {
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+/* MAPA */
+
+#map {
+    width: 100%;
+    height: 225px;
+    
+    border: 2px solid var(--brand-secondary);
+
+    z-index: 0;
+}
+
+
+/* buttons for dayz*/
+
+.dayButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.dayButton {
+    background-color: var(--paper);
+    color: var(--brand-secondary);
+    border: 1px solid var(--brand-secondary);
+    font-weight: 600;
+}
+
+.dayButton:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+}
+
+.dayButton.active,
+.dayButton.active:focus,
+.dayButton.active:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+}
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+
+    header {
+        position: relative;
+        flex-direction: column;
+        align-items: stretch;
+
+        min-height: auto;
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 30px;
+        padding-right: 55px;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    .menuToggle {
+        display: block;
+        position: absolute;
+        top: 18px;
+        right: 20px;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: 20px;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+
+        margin: 0;
+        padding: 0;
+
+        transition: max-height 0.4s ease,
+                    opacity 0.3s ease,
+                    padding 0.4s ease;
+    }
+
+    nav.isOpen ul {
+        max-height: 300px;
+        opacity: 1;
+        padding: 25px 0 10px;
+    }
+
+    nav a {
+        font-size: 15px;
+    }
+
+     footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .pageLayout {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "intro"
+            "filters"
+            "menu"
+            "map";
+
+        gap: 25px;
+    }
+
+    .rightLayout {
+        width: 100%;
+    }
+
+    #map {
+        height: 250px;
+    }
+
+    .motto {
+        font-size: 42px;
+    }
+
+    .dateLine {
+        width: 100%;
+    }
+
+    .display-7{
+        font-size: larger;
+    }
+
+    
+    .dayButtons {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .dayButton {
+        width: 100%;
+        padding: 8px 0;
+    }
+
+    .dayButton.lastButton {
+        grid-column: 1 / -1;
+    }
+
+
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    nav ul {
+        transition: none;
+    }
+}
