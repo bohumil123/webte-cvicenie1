@@ -175,6 +175,12 @@
                     Celý týždeň
                 </button>
             </div>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <button id="refreshMenu" class="btn dayButton" type="button">Aktualizovať menu</button>
+                <button id="clearMenuCache" class="btn dayButton" type="button">Vymazať uložené dáta</button>
+            </div>
+            <p id="lastMenuUpdate" class="text-secondary mt-2 mb-0" hidden></p>
+            <p id="menuStatus" class="text-secondary mt-2 mb-0" role="status" hidden></p>
             <div id="menuContent" class="mt-4" aria-live="polite" aria-busy="true">
                 <p class="text-secondary" role="status">Načítavam menu…</p>
             </div>

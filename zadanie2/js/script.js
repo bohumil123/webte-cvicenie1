@@ -74,15 +74,90 @@ if (document.getElementById("map")) {
 
 
 let allFoods = [];
-let isLoading = true;
+let isLoading = false;
 const restaurantErrors = new Map();
+const restaurantUpdatedAt = new Map();
+let storageMessage = "";
 const menuSources = [
-    { restaurant: idylaRestaurant, load: loadIdylaMenu },
-    { restaurant: dragRestaurant, load: loadDragMenu },
-    { restaurant: eatAndMeetRestaurant, load: loadEatAndMeetMenu }
+    { id: "idyla", restaurant: idylaRestaurant, load: loadIdylaMenu },
+    { id: "drag", restaurant: dragRestaurant, load: loadDragMenu },
+    { id: "eat-and-meet", restaurant: eatAndMeetRestaurant, load: loadEatAndMeetMenu }
 ];
 
-const dayButtons = document.querySelectorAll(".dayButton");
+function menuCacheKey(source) {
+    return `menucka-pri-fei:menu:v1:${source.id}`;
+}
+
+function showMenuStatus(message) {
+    const status = document.getElementById("menuStatus");
+    if (!status) return;
+    status.textContent = message;
+    status.hidden = !message;
+}
+
+function readCachedMenu(source) {
+    let stored;
+    try {
+        stored = localStorage.getItem(menuCacheKey(source));
+    } catch {
+        storageMessage = "Ukladanie dát v prehliadači nie je dostupné. Menu môžete naďalej používať.";
+        return null;
+    }
+    if (!stored) return null;
+
+    try {
+        const cached = JSON.parse(stored);
+        const timestamp = Date.parse(cached?.updatedAt);
+        const validPrice = value => value === null || (Number.isFinite(value) && value >= 0);
+        if (cached?.version !== 1 || typeof cached.updatedAt !== "string"
+            || !Number.isFinite(timestamp) || timestamp > Date.now()
+            || dayjs(timestamp).format("YYYY-MM-DD") !== dayjs().format("YYYY-MM-DD")
+            || !Array.isArray(cached.foods)) return null;
+
+        const validFoods = cached.foods.every(food => food
+            && food.restaurant === source.restaurant.name
+            && typeof food.name === "string"
+            && Number.isInteger(food.day) && food.day >= 1 && food.day <= 7
+            && ["soup", "main"].includes(food.type)
+            && validPrice(food.price)
+            && (food.isicPrice === undefined || validPrice(food.isicPrice))
+            && (food.portion == null || typeof food.portion === "string")
+            && (food.date == null || (typeof food.date === "string"
+                && /^\d{4}-\d{2}-\d{2}$/.test(food.date) && Number.isFinite(Date.parse(food.date))))
+            && Array.isArray(food.allergens)
+            && food.allergens.every(number => Number.isInteger(number) && number >= 1 && number <= 14));
+        return validFoods ? cached : null;
+    } catch {
+        return null;
+    }
+}
+
+async function loadRestaurantMenu(source, forceReload) {
+    const cached = forceReload ? null : readCachedMenu(source);
+    if (cached) return cached;
+
+    const foods = await source.load();
+    const menu = { version: 1, updatedAt: new Date().toISOString(), foods };
+    try {
+        localStorage.setItem(menuCacheKey(source), JSON.stringify(menu));
+    } catch {
+        storageMessage = "Menu sa načítalo, ale nepodarilo sa ho uložiť v prehliadači.";
+    }
+    return menu;
+}
+
+document.getElementById("refreshMenu")?.addEventListener("click", () => initializeMenus(true));
+document.getElementById("clearMenuCache")?.addEventListener("click", () => {
+    if (isLoading) return;
+    try {
+        menuSources.forEach(source => localStorage.removeItem(menuCacheKey(source)));
+        showMenuStatus("Uložené dáta boli vymazané. Pri ďalšom otvorení stránky sa menu načíta znova.");
+    } catch {
+        showMenuStatus("Uložené dáta sa nepodarilo vymazať. Úložisko prehliadača nie je dostupné.");
+    }
+});
+
+const dayButtons = document.querySelectorAll(".dayButtons .dayButton[data-day]");
 
 
 const currentDay = today.day();
@@ -213,7 +288,7 @@ function getDayNumber(heading) {
 async function loadMenuDocument(path) {
     let response;
     try {
-        response = await fetch(path);
+        response = await fetch(path, { cache: "no-store" });
         if (!response.ok) throw new Error(String(response.status));
         const html = await response.text();
         return new DOMParser().parseFromString(html, "text/html");
@@ -382,6 +457,22 @@ function renderMenu() {
         return;
     }
 
+    const updateLabel = document.getElementById("lastMenuUpdate");
+    if (updateLabel) {
+        const updatedAt = [...restaurantUpdatedAt.values()]
+            .sort((a, b) => Date.parse(b) - Date.parse(a))[0];
+        updateLabel.replaceChildren();
+        if (updatedAt) {
+            const time = document.createElement("time");
+            time.dateTime = updatedAt;
+            time.textContent = dayjs(updatedAt).format("D. M. YYYY, HH:mm:ss");
+            updateLabel.append("Posledná úspešná aktualizácia: ", time);
+        } else {
+            updateLabel.textContent = "Posledná úspešná aktualizácia nie je k dispozícii.";
+        }
+        updateLabel.hidden = false;
+    }
+
     const selectedRestaurants = getSelectedRestaurants();
 
     const filteredFoods = allFoods.filter(food => {
@@ -475,20 +566,34 @@ function renderMenu() {
 }
 
 
-async function initializeMenus() {
+async function initializeMenus(forceReload = false) {
     if (!document.getElementById("menuContent")) return;
+    if (isLoading) return;
+    isLoading = true;
+    storageMessage = "";
+    restaurantErrors.clear();
+    const buttons = [document.getElementById("refreshMenu"), document.getElementById("clearMenuCache")];
+    buttons.forEach(button => { if (button) button.disabled = true; });
+    showMenuStatus("");
     selectDay(selectedDay);
 
-    const menus = await Promise.allSettled(menuSources.map(source => source.load()));
+    const menus = await Promise.allSettled(menuSources.map(source => loadRestaurantMenu(source, forceReload)));
     menus.forEach((menu, index) => {
+        const restaurant = menuSources[index].restaurant;
         if (menu.status === "rejected") {
             const message = menu.reason?.message;
-            restaurantErrors.set(menuSources[index].restaurant.name,
+            restaurantErrors.set(restaurant.name,
                 message?.startsWith("Menu") ? message : "Menu reštaurácie sa nepodarilo spracovať.");
+        } else {
+            restaurantUpdatedAt.set(restaurant.name, menu.value.updatedAt);
         }
     });
-    allFoods = menus.flatMap(menu => menu.status === "fulfilled" ? menu.value : []);
+    allFoods = menus.flatMap(menu => menu.status === "fulfilled" ? menu.value.foods : []);
     isLoading = false;
+    buttons.forEach(button => { if (button) button.disabled = false; });
+    showMenuStatus(storageMessage || (forceReload
+        ? (restaurantErrors.size ? "Niektoré menu sa nepodarilo aktualizovať. Podrobnosti sú pri reštauráciách." : "Menu bolo aktualizované.")
+        : ""));
     renderMenu();
 }
 
