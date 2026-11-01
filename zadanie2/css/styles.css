@@ -8,8 +8,7 @@
     --line: #cbc8b9;
     --muted: #57554e;
 
-    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
-    --body: "Poppins", Arial, sans-serif;
+    --body: "Poppins", sans-serif;
 }
 
 /* FONTS */
@@ -18,14 +17,18 @@
 
 @font-face {
     font-family: "Poppins";
-    src: url(../assets/fonts/Poppins-Regular\ .ttf) format("truetype");
+    src: url(../assets/fonts/poppins-latin-400-normal.woff2) format("woff2");
+    font-style: normal;
     font-weight: 400;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Poppins";
-    src: url(../assets/fonts/Poppins-SemiBold\ \(1\).ttf) format("truetype");
+    src: url(../assets/fonts/poppins-latin-600-normal.woff2) format("woff2");
+    font-style: normal;
     font-weight: 600;
+    font-display: swap;
 }
 
 /* GENERAL */
@@ -40,6 +43,11 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
+    font-family: var(--body);
+}
+
+.leaflet-container,
+.leaflet-container .leaflet-control-zoom a {
     font-family: var(--body);
 }
 
@@ -58,13 +66,29 @@ header {
 }
 
 header h1 {
-    font-family: var(--display);
+    font-family: var(--body);
     font-size: 36px;
     font-weight: 700;
 
     color: var(--white);
     margin: 0;
     line-height: 1;
+}
+
+header h1 img {
+    width: 1em;
+    height: 1em;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.restaurantMenu h3 a {
+    color: var(--accent);
+    text-underline-offset: 4px;
+}
+
+.restaurantMenu h3 a:hover {
+    color: var(--brand-secondary);
 }
 
 /* NAVIGATION */
@@ -112,7 +136,7 @@ nav a.active:visited {
 
 footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 15px;
@@ -200,6 +224,7 @@ footer a:hover {
     grid-area: filters;
     overflow: hidden;
     border: 1px solid var(--line);
+    border-radius: 0;
     align-self: flex-start;
 
 }
@@ -207,6 +232,7 @@ footer a:hover {
 /* RESTAURANT FILTER THINGS */
 
 .filters .card-header{
+    border-radius: 0;
     background-color: var(--brand-secondary);
     color: var(--white);
     font-weight: bold;
@@ -247,7 +273,8 @@ footer a:hover {
 }
 
 #foodCount {
-    color: var(--accent);
+    color: #000;
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0;
 }
@@ -256,7 +283,7 @@ footer a:hover {
 
 #map {
     width: 100%;
-    height: 225px;
+    height: 175px;
     
     border: 2px solid var(--brand-secondary);
 
@@ -292,6 +319,120 @@ footer a:hover {
     border-color: var(--accent);
     color: var(--white);
 }
+
+
+/* Cards for foooood */
+
+
+.foodGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+
+.foodCard {
+    background-color: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 0;
+}
+
+.foodCard .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
+
+
+.foodType {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+
+.foodDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    margin-top: auto;
+}
+
+.foodDetails p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.allergenWrapper {
+    position: relative;
+}
+
+.allergenPanel {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+
+    width: max-content;
+    max-width: min(300px, 80vw);
+
+    padding: 12px 16px;
+
+    background-color: var(--brand-primary);
+    color: white;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+    z-index: 100;
+}
+
+.allergenPanel p {
+    margin: 0 0 6px;
+    font-size: 0.85rem;
+}
+
+.allergenPanel p:last-child {
+    margin-bottom: 0;
+}
+
+.allergenWrapper.isOpen .allergenPanel {
+    display: block;
+}
+
+
+.allergenButton {
+    color: var(--accent);
+    font-size: 20px;
+}
+
+.allergenButton:hover {
+    color: var(--brand-secondary);
+}
+
+.allergenButton:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.dailySpecial {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+
+
+
 
 /* MOBILE */
 
@@ -362,9 +503,9 @@ footer a:hover {
 
         grid-template-areas:
             "intro"
+            "map"
             "filters"
-            "menu"
-            "map";
+            "menu";
 
         gap: 25px;
     }
@@ -405,13 +546,12 @@ footer a:hover {
         grid-column: 1 / -1;
     }
 
-
-
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-    nav ul {
-        transition: none;
+    .foodGrid {
+        grid-template-columns: 1fr;
     }
+
+
+
 }
+
+
