@@ -171,7 +171,8 @@ function parseFood(text) {
         .replace(portionPattern, "")
         .replace(/^\d+\.\s*/, "")
         .replace(/\s+/g, " ")
-        .trim();
+        .trim()
+        .replace(/^\.+\s*/, "");
 
     return { name, price, allergens, portion };
 }
