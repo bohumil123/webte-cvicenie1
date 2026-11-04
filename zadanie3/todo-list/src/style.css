@@ -1,0 +1,73 @@
+:root {
+  /* Primárna farba */
+  --bs-primary: #4F46E5;
+
+
+  /* Stavové farby */
+  --bs-success: #198754;
+  --bs-warning: #FFC107;
+  --bs-danger: #DC3545;
+
+  /* Pozadie a text */
+  --bs-body-bg: #F8F9FA;
+  --bs-body-color: #212529;
+
+  /* Vlastné premenné (karty, priority) */
+  --app-card-bg: #FFFFFF;
+  --app-priority-low: #198754;
+  --app-priority-medium: #FFC107;
+  --app-priority-high: #DC3545;
+
+  --app-space: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+button {
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--bs-primary);
+  outline-offset: 4px;
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+main {
+  width: min(100% - 40px, 1000px);
+  margin: 48px auto;
+}
+
+main > h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+main > p {
+  margin: 0 0 36px;
+  color: color-mix(in srgb, var(--bs-body-color) 65%, var(--bs-body-bg));
+}
+main > section > h2 {
+  margin: 0 0 20px;
+  font-size: 1.25rem;
+}
+@media (max-width: 600px) {
+  main {
+    margin: 28px auto;
+  }
+}
